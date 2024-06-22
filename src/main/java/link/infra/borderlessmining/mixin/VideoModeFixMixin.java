@@ -26,4 +26,10 @@ public class VideoModeFixMixin extends GameOptionsScreen {
 			this.client.getWindow().applyVideoMode();
 		}
 	}
+
+	@Override
+	protected void addOptions() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'addOptions'");
+	}
 }
