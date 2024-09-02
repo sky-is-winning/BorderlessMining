@@ -36,13 +36,12 @@ public abstract class WindowMixin implements WindowHooks {
 	private long handle;
 
 	@Shadow
-	private boolean videoModeDirty;
-
+	private boolean fullscreenVideoModeDirty;
 	@Shadow
 	@Final
 	private MonitorTracker monitorTracker;
 
-	@Shadow public abstract void applyVideoMode();
+	@Shadow public abstract void applyFullscreenVideoMode();
 
 	// Determines if the window *was* in borderless fullscreen (hence the windowed coordinates should not be trusted)
 	private boolean borderlessmining_wasEnabled = false;
@@ -128,14 +127,14 @@ public abstract class WindowMixin implements WindowHooks {
 	}
 
 	// Save config and update video mode if video mode is applied
-	@Inject(method = "applyVideoMode", at = @At("HEAD"))
-	private void onApplyVideoMode(CallbackInfo info) {
+	@Inject(method = "applyFullscreenVideoMode", at = @At("HEAD"))
+	private void onapplyFullscreenVideoMode(CallbackInfo info) {
 		ConfigHandler.getInstance().saveIfDirty();
 	}
 
 	@Override
 	public void borderlessmining_apply() {
-		videoModeDirty = true;
-		applyVideoMode();
+		fullscreenVideoModeDirty = true;
+		applyFullscreenVideoMode();
 	}
 }

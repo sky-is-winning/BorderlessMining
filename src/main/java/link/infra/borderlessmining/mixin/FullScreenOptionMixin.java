@@ -43,7 +43,7 @@ public abstract class FullScreenOptionMixin extends GameOptionsScreen {
         if (monitor == null) {
             j = -1;
         } else {
-            Optional<VideoMode> optional = window.getVideoMode();
+            Optional<VideoMode> optional = window.getFullscreenVideoMode();
             Objects.requireNonNull(monitor);
             j = (Integer) optional.map(monitor::findClosestVideoModeIndex).orElse(-1);
         }
@@ -80,7 +80,7 @@ public abstract class FullScreenOptionMixin extends GameOptionsScreen {
         // Update BM settings when the slider is changed
         Consumer<Integer> oldConsumer = (value) -> {
             if (monitor != null) {
-                window.setVideoMode(value == -1 ? Optional.empty() : Optional.of(monitor.getVideoMode(value)));
+                window.setFullscreenVideoMode(value == -1 ? Optional.empty() : Optional.of(monitor.getVideoMode(value)));
             }
         };
 
